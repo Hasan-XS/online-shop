@@ -27,9 +27,10 @@ def login():
     
 
 @app.route('/admin/dashboard/product', methods = ["POST", "GET"])
-def product():
+def products():
     if request.method == "GET":
-        return render_template("admin/product.html")
+        products = Product.query.all()
+        return render_template("admin/product.html", products=products)
     else:
         name = request.form.get("name", None)
         price = request.form.get("price", None)
