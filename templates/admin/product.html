@@ -4,9 +4,12 @@
 {% endblock %}
 
 {% block body %}
-    <form action="#" method="post">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
+    <form action="#" method="post" enctype="multipart/form-data">
+        <input type="file" name="cover" id=""><br>
+        <input type="text" name="name" id=""><br>
+        <textarea name="description" id="" cols="30" rows="10"></textarea><br>
+        <input type="number" name="price" id=""><br>
+        <input type="checkbox" name="active" id=""><br>
         <input type="submit">
     </form>
 {% endblock %}

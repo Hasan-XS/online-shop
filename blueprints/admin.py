@@ -21,7 +21,7 @@ def login():
             session['admin_login'] = username
             return redirect(url_for("admin.dashboard"))
         else:
-            return redirect("admin.login")
+            return redirect(url_for("admin.login"))
     else:
         return render_template("admin/login.html")
     
@@ -47,7 +47,7 @@ def product():
         db.session.commit()
 
         file.save(f"static/cover/{p.id}.jpg")
-        return redirect("admin.dashboard")
+        return redirect(url_for("admin.dashboard"))
 
 @app.route('/admin/dashboard', methods = ["POST", "GET"])
 def dashboard():
