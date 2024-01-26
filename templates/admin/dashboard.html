@@ -2,8 +2,12 @@
 <title>admin | Product</title>
 {% endblock %} {% block body %}
 <section>
-    <table style="border: 2px solid #b4b4b4; border-radius: 12px; padding: 12px;">
-      <tr >
+  <section>
+    <h2>PRODUCTS</h2>
+    <table
+      style="border: 2px solid #b4b4b4; border-radius: 12px; padding: 12px"
+    >
+      <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
@@ -20,7 +24,26 @@
       </tr>
       {% endfor %}
     </table>
+  </section>
+  <section>
+    <h2>USERS</h2>
+    <table
+      style="border: 2px solid #b4b4b4; border-radius: 12px; padding: 12px"
+    >
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Email</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.username|truncate(20)}}</td>
+        <td>{{ user.password|truncate(20) }}</td>
+        <td>{{ user.email|truncate(20) }}</td>
+      </tr>
+      {% endfor %}
+    </table>
     <h1><a href="/admin/dashboard/product">Add Product</a></h1>
-    <h1><a href="/admin/dashboard/product">Edit Product</a></h1>
+  </section>
 </section>
 {% endblock %}
