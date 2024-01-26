@@ -1,6 +1,7 @@
 from flask import Blueprint, abort, session, request, render_template, redirect, url_for
 from extention import *
 from model.product import Product
+from model.user import User
 
 app = Blueprint("admin", __name__)
 
@@ -77,5 +78,6 @@ def edit_product(id):
 
 @app.route('/admin/dashboard', methods = ["POST", "GET"])
 def dashboard():
+    users = User.query.all()
     products = Product.query.all()
-    return render_template("admin/dashboard.html", products=products)
+    return render_template("admin/dashboard.html", products=products, users=users)
