@@ -52,4 +52,5 @@ def products():
 
 @app.route('/admin/dashboard', methods = ["POST", "GET"])
 def dashboard():
-    return "dashboard"
+    products = Product.query.all()
+    return render_template("admin/dashboard.html", products=products)
