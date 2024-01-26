@@ -49,6 +49,33 @@ def products():
 
         file.save(f"static/cover/{p.id}.jpg")
         return redirect(url_for("admin.dashboard"))
+    
+
+@app.route('/admin/dashboard/edit-product/<id>', methods = ["POST", "GET"])
+def edit_product(id):
+    products = Product.query.filter(Product.id == id).first_or_404()
+
+    if request.method == "GET":
+        return render_template("admin/edit-product.html", products=products)
+    else:
+        name = request.form.get("name", None)
+        price = request.form.get("price", None)
+        description = request.form.get("description", None)
+        active = request.form.get("active", None)
+
+
+        products.name = name
+        products.price = price
+        products.description = description
+        if active == None:
+            products.active = 0
+        else:
+            products.active = 1
+
+        db.session.commit()
+
+        return redirect(url_for("admin.dashboard"))
+
 
 @app.route('/admin/dashboard', methods = ["POST", "GET"])
 def dashboard():
