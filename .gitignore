@@ -1,4 +1,5 @@
+instance/MyDB.db
 templates/base.html
 __pycache__/
 config.py
-cover
+static/cover

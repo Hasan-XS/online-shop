@@ -16,7 +16,7 @@
         <td>{{ p.description }}</td>
         <td>{{ p.price }}</td>
         <td>{{ p.active }}</td>
-        <td><a href="#">Edit</a></td>
+        <td><a href="/admin/dashboard/edit-product/{{ p.id }}">Edit</a></td>
       </tr>
       {% endfor %}
     </table>
