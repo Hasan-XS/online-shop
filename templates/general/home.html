@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %}
+<title>HOME</title>
+{% endblock %} {% block body %}
+<section>
+    {% for p in products %}
+        <section>
+            {{ p.name }}
+            {{ p.description }}
+            {{ p.price }}
+            {{ p.active }}
+        </section>
+    {% endfor %}
+</section>
+{% endblock %}
