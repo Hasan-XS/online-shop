@@ -4,8 +4,6 @@ from model.product import Product
 
 app = Blueprint("admin", __name__)
 
-
-
 @app.before_request
 def before_request():
     if session.get('admin_login', None) == None and request.endpoint != "admin.login":
@@ -40,9 +38,9 @@ def products():
 
         p = Product(name = name, description = description, price = price)
         if active == None:
-            p.active = 0
+            p.active = "not active"
         else:
-            p.active = 1
+            p.active = "active"
 
         db.session.add(p)
         db.session.commit()
@@ -68,9 +66,9 @@ def edit_product(id):
         products.price = price
         products.description = description
         if active == None:
-            products.active = 0
+            products.active = "not active"
         else:
-            products.active = 1
+            products.active = "active"
 
         db.session.commit()
 
