@@ -7,3 +7,7 @@ app = Blueprint("general", __name__)
 def home():
     products = Product.query.all()
     return render_template("general/home.html", products=products)
+
+@app.route("/about")
+def about():
+    return render_template("general/about.html")
