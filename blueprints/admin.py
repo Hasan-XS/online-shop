@@ -2,6 +2,7 @@ from flask import Blueprint, abort, session, request, render_template, redirect,
 from extention import *
 from model.product import Product
 from model.user import User
+import config
 
 app = Blueprint("admin", __name__)
 
@@ -10,13 +11,14 @@ def before_request():
     if session.get('admin_login', None) == None and request.endpoint != "admin.login":
         abort(403)
 
+# Admin login route
 @app.route('/admin/login', methods = ["POST", "GET"])
 def login():
     if request.method == "POST":
         username = request.form.get("username", None)
         password = request.form.get("password", None)
 
-        if username == "admin" and password == "1234" :
+        if username == config.ADMIN_USERNAME_LOGIN and password == config.ADMIN_PASSWORD_LOGIN:
             session['admin_login'] = username
             return redirect(url_for("admin.dashboard"))
         else:
@@ -25,6 +27,7 @@ def login():
         return render_template("admin/login.html")
     
 
+# Admin product route
 @app.route('/admin/dashboard/product', methods = ["POST", "GET"])
 def products():
     if request.method == "GET":
