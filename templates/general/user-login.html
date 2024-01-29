@@ -1,15 +1,27 @@
-{% extends 'base.html' %}
-{% block title %}
-    <title>User | login</title>
-{% endblock %}
-
-{% block body %}
+{% extends 'base.html' %} {% block title %}
+<title>User | Login</title>
+{% endblock %} {% block body %}
+<section>
+  <section>
+    <h1>Register</h1>
     <form action="#" method="post">
-        <input type="hidden" name="regis">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="email" name="email" placeholder="email">
-        <!-- <textarea name="address" placeholder="address" id="" cols="30" rows="10"></textarea> -->
-        <input type="submit">
+      <input type="hidden" name="regis" />
+      <input type="text" name="username" placeholder="username" /><br />
+      <input type="password" name="password" placeholder="password" /><br />
+      <input type="email" name="email" placeholder="email" /><br />
+      <input type="submit" />
     </form>
+  </section>
+  <section>
+    <h2>Login</h2>
+    <form action="#" method="post">
+      <input type="text" name="username" placeholder="username" /><br />
+      <input type="password" name="password" placeholder="password" /><br />
+      <input type="submit" />
+    </form>
+  </section>
+  {% for m in get_flashed_messages() %}
+  {{ m }}
+{% endfor %}
+</section>
 {% endblock %}
