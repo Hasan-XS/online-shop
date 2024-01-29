@@ -40,6 +40,6 @@ def login():
                 flash("The username or password is wrong!")
                 return redirect(url_for("user.login"))
 
-@app.route("/user/dashboard")
+@app.route("/user/dashboard", methods=["GET"])
 def dashboard():
     return "dashboard"
