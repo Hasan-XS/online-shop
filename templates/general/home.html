@@ -2,13 +2,16 @@
 <title>HOME</title>
 {% endblock %} {% block body %}
 <section>
-    {% for p in products %}
-        <section>
-            {{ p.name }}
-            {{ p.description }}
-            {{ p.price }}
-            {{ p.active }}
-        </section>
-    {% endfor %}
+  {% for p in products %}
+  <a href="#" style="all: unset; cursor: pointer">
+    <div>
+      <img style="width: 200px" src="/static/cover/{{ p.id }}.jpg" />
+    </div>
+    <div>{{ p.name }}</div>
+    <div>{{ p.description }}</div>
+    <div>{{ p.price }}</div>
+    <div>{{ p.active }}</div>
+  </a>
+  {% endfor %}
 </section>
 {% endblock %}
