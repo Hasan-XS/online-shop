@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %}
+<title>HOME</title>
+{% endblock %} {% block body %}
+<section>
+  <div>
+    <img style="width: 400px" src="/static/cover/{{ details.id }}.jpg" />
+  </div>
+  <div>{{ details.name }}</div>
+  <div>{{ details.description }}</div>
+  <div>{{ details.price }}</div>
+  <div><a href=""></a><button>Add To Cart</button></a></div>
+</section>
+{% endblock %}
