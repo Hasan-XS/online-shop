@@ -3,7 +3,7 @@
 {% endblock %} {% block body %}
 <section>
   {% for p in products %}
-  <a href="#" style="all: unset; cursor: pointer">
+  <a href="/details/{{p.id}}/{{p.name}}" style="all: unset; cursor: pointer">
     <div>
       <img style="width: 200px" src="/static/cover/{{ p.id }}.jpg" />
     </div>
