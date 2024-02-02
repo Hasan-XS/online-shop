@@ -1,17 +1,17 @@
 {% extends 'base.html' %} {% block title %}
 <title>admin | Product</title>
 {% endblock %} {% block body %}
-<section>
-  <section>
+<section align="center">
+  <h1 align="center">Dashboard</h1>
+  <hr>
+  <section >
     <h2>PRODUCTS</h2>
-    <table
-      style="border: 2px solid #b4b4b4; border-radius: 12px; padding: 12px"
-    >
+    <table align="center">
       <tr>
         <th>Picture</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Price</th>
+        <th>$Price</th>
         <th>Dispaly</th>
         <th>Edit</th>
       </tr>
@@ -20,7 +20,7 @@
         <td><img style="width: 40px" src="/static/cover/{{ p.id }}.jpg"></td>
         <td>{{ p.name|truncate(20) }}</td>
         <td>{{ p.description|truncate(20) }}</td>
-        <td>{{ p.price }}</td>
+        <td>${{ p.price }}</td>
         <td>{{ p.active }}</td>
         <td><a href="/admin/dashboard/edit-product/{{ p.id }}">Edit</a></td>
       </tr>
@@ -28,10 +28,8 @@
     </table>
   </section>
   <section>
-    <h2>USERS</h2>
-    <table
-      style="border: 2px solid #b4b4b4; border-radius: 12px; padding: 12px"
-    >
+    <h2 align="center">USERS</h2>
+    <table align="center">
       <tr>
         <th>Username</th>
         <th>Password</th>

@@ -18,7 +18,7 @@
         <th>Picture</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Price</th>
+        <th>$Price</th>
         <th>Dispaly</th>
       </tr>
       {% for p in products %}
@@ -26,7 +26,7 @@
         <td><img style="width: 40px" src="/static/cover/{{ p.id }}.jpg"></td>
         <td>{{ p.name|truncate(20) }}</td>
         <td>{{ p.description|truncate(20) }}</td>
-        <td>{{ p.price }}</td>
+        <td>${{ p.price }}</td>
         <td>{{ p.active }}</td>
       </tr>
       {% endfor %}
