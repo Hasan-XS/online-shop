@@ -3,3 +3,4 @@ templates/base.html
 __pycache__/
 config.py
 static/cover
+.idea/
