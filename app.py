@@ -6,12 +6,15 @@ from flask_login import LoginManager
 import config
 from model.user import User
 from extention import *
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 login_manager = LoginManager()
 # Secret key
 app.config['SECRET_KEY'] = config.SECRET_KEY
 app.config["SQLALCHEMY_DATABASE_URI"] = config.SQLALCHEMY_DATABASE_URI
+
+migrate = Migrate(app, db)
 db.init_app(app)
 login_manager.init_app(app)
 
