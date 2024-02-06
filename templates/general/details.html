@@ -8,6 +8,9 @@
   <div>{{ details.name }}</div>
   <div>{{ details.description }}</div>
   <div>${{ details.price }}</div>
-  <div><a href=""></a><button>Add To Cart</button></a></div>
+  <form method="get" action="/add-to-cart">
+    <input type="hidden" name="id" value="{{ details.id }}">
+    <input type="submit" value="Add to cart">
+  </form>
 </section>
 {% endblock %}

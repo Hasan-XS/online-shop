@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Cart User</title>
+{% endblock %}
+
+{% block body %}
+	{% for cart_item in cart.cart_items %}
+        <section>
+        <img style="width: 200px" src="/static/cover/{{ cart_item.product.id }}.jpg" />
+        <h2>{{ cart_item.product.name }}</h2>
+        <h2>{{ cart_item.product.price }}</h2>
+        <h2>{{ cart_item.quantity }}</h2>
+        </section>
+        <hr>
+    {% endfor %}
+{% endblock %}

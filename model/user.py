@@ -3,7 +3,7 @@ from extention import db
 from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
-    __tablename__ = "Users"
+    __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False, index=True)
     password = Column(String, nullable=False, index=True)
