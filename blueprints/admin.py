@@ -6,13 +6,15 @@ import config
 
 app = Blueprint("admin", __name__)
 
+
 @app.before_request
 def before_request():
     if session.get('admin_login', None) == None and request.endpoint != "admin.login":
         abort(403)
 
+
 # Admin login route
-@app.route('/admin/login', methods = ["POST", "GET"])
+@app.route('/admin/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
         username = request.form.get("username", None)
@@ -25,10 +27,10 @@ def login():
             return redirect(url_for("admin.login"))
     else:
         return render_template("admin/login.html")
-    
+
 
 # Admin product route
-@app.route('/admin/dashboard/product', methods = ["POST", "GET"])
+@app.route('/admin/dashboard/product', methods=["POST", "GET"])
 def products():
     if request.method == "GET":
         products = Product.query.all()
@@ -40,7 +42,7 @@ def products():
         file = request.files.get("cover", None)
         active = request.form.get("active", None)
 
-        p = Product(name = name, description = description, price = price)
+        p = Product(name=name, description=description, price=price)
         if active == None:
             p.active = "not active"
         else:
@@ -51,9 +53,9 @@ def products():
 
         file.save(f"static/cover/{p.id}.jpg")
         return redirect(url_for("admin.dashboard"))
-    
 
-@app.route('/admin/dashboard/edit-product/<id>', methods = ["POST", "GET"])
+
+@app.route('/admin/dashboard/edit-product/<id>', methods=["POST", "GET"])
 def edit_product(id):
     products = Product.query.filter(Product.id == id).first_or_404()
 
@@ -64,7 +66,6 @@ def edit_product(id):
         price = request.form.get("price", None)
         description = request.form.get("description", None)
         active = request.form.get("active", None)
-
 
         products.name = name
         products.price = price
@@ -79,7 +80,7 @@ def edit_product(id):
         return redirect(url_for("admin.dashboard"))
 
 
-@app.route('/admin/dashboard', methods = ["POST", "GET"])
+@app.route('/admin/dashboard', methods=["POST", "GET"])
 def dashboard():
     users = User.query.all()
     products = Product.query.all()
