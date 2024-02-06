@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for, flash
 from blueprints.admin import app as admin
 from blueprints.general import app as general
 from blueprints.user import app as user
@@ -23,6 +23,12 @@ app.register_blueprint(user)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.filter(User.id == user_id).first_or_404()
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    flash('Please login')
+    return redirect(url_for("user.login"))
+
 
 with app.app_context():
     db.create_all()
