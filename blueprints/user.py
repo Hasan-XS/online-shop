@@ -81,7 +81,7 @@ def add_to_cart():
 @app.route('/remove-cart', methods=['GET'])
 @login_required
 def remove_cart():
-    id = request.args.get('id')
+    id = request.args.get('id-rem')
     cart_item = CartItem.query.filter(CartItem.id == id).first_or_404()
     flash(f"Your cart item is {cart_item} removed!", "success")
     if cart_item.quantity > 1:
@@ -90,6 +90,36 @@ def remove_cart():
         db.session.delete(cart_item)
     db.session.commit()
     return redirect(url_for('user.cart'))
+
+
+@app.route('/Increase-cart', methods=['GET'])
+@login_required
+def Increase_cart():
+    id = request.args.get('id-inc')
+    cart_item = CartItem.query.filter(CartItem.id == id).first_or_404()
+    flash(f"Your cart item is {cart_item} Increase!", "success")
+    if cart_item.quantity >= 1:
+        cart_item.quantity += 1
+    else:
+        db.session.add(cart_item)
+    db.session.commit()
+    return redirect(url_for('user.cart'))
+
+
+@app.route('/empty-cart', methods=['GET'])
+@login_required
+def empty_cart():
+    id = request.args.get('id-empty')
+    cart_item = CartItem.query.filter(CartItem.id == id).first_or_404()
+    flash(f"Your cart item is {cart_item} removed!", "success")
+    if cart_item.quantity >= 1:
+        cart_item.quantity -= cart_item.quantity
+        db.session.delete(cart_item)
+    # else:
+    #     db.session.delete(ct)
+    db.session.commit()
+    return redirect(url_for('user.cart'))
+
 
 @app.route('/user/cart', methods=['GET'])
 @login_required
