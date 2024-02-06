@@ -23,7 +23,7 @@
                     </form>
                 </section>
             </section>
-            <b>Total price: {{ cart.total_price }}</b>
+            <b>Total price: {{ cart.total_price() }}</b>
             <form action="/empty-cart">
                 <input type="hidden" name="id-empty" value="{{ cart_item.id }}">
                 <input type="submit" value="Empty">
