@@ -24,6 +24,7 @@
                 </section>
             </section>
             <b>Total price: {{ cart.total_price() }}</b>
+            <a href="/payment">Payment</a>
             <form action="/empty-cart">
                 <input type="hidden" name="id-empty" value="{{ cart_item.id }}">
                 <input type="submit" value="Empty">
