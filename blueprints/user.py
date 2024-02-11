@@ -1,11 +1,15 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, flash
+import requests
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_user, login_required, current_user
 from passlib.hash import sha256_crypt
+
+import config
+from extention import *
 from model.cart import Cart
 from model.cart_item import CartItem
+from model.payment import Payment
 from model.product import Product
 from model.user import User
-from extention import *
-from flask_login import login_user, login_required, current_user
 
 app = Blueprint("user", __name__)
 
@@ -126,3 +130,50 @@ def empty_cart():
 def cart():
     cart = current_user.carts.filter(Cart.status == 'pending').first()
     return render_template("general/cart.html", cart=cart)
+
+
+@app.route('/payment', methods=['GET'])
+@login_required
+def payment():
+    cart = current_user.carts.filter(Cart.status == 'pending').first()
+    r = requests.post(config.FIRST_REQUEST_PAYMENT,
+                      data={"api": 'sandbox',
+                            "amount": cart.total_price(),
+                            "callback": config.REQUEST_PAYMENT_VERIFY_CALLBACK})
+    token = r.json()['result']['token']
+    url = r.json()['result']['url']
+    pay = Payment(token=token, price=cart.total_price())
+    pay.cart = cart
+    db.session.add(pay)
+    db.session.commit()
+    return redirect(url)
+
+
+@app.route('/verify', methods=['GET'])
+@login_required
+def verify():
+    token = request.args.get("token")
+    pay = Payment.query.filter(Payment.token == token).first_or_404()
+    cart = current_user.carts.filter(Cart.status == 'pending').first()
+    r = requests.post(config.REQUEST_PAYMENT_VERIFY,
+                      data={"api": 'sandbox',
+                            "amount": pay.price,
+                            "token": token
+                            })
+    pay_status = bool(r.json()['success'])
+    if pay_status:
+        transaction_id = r.json()['result']['transaction_id']
+        card_pan = r.json()['result']['card_pan']
+        refid = r.json()['result']['refid']
+
+        pay.card_pan = card_pan
+        pay.refid = refid
+        pay.transaction_id = transaction_id
+        pay.status = "success"
+        pay.cart.status = "paid"
+        flash("Your cart (success)")
+    else:
+        pay.status = "Failed"
+
+    db.session.commit()
+    return redirect(url_for('user.dashboard'))
