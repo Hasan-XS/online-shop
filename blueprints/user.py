@@ -52,7 +52,14 @@ def login():
 @app.route("/user/dashboard", methods=["GET"])
 @login_required
 def dashboard():
-    return "dashboard"
+    return render_template("general/dashboard.html")
+
+
+@app.route("/user/dashboard/order/<id>", methods=["GET"])
+@login_required
+def order(id):
+    cart = current_user.carts.filter(Cart.id == id).first_or_404()
+    return render_template("general/order.html", cart=cart)
 
 
 @app.route('/add-to-cart', methods=['GET'])
