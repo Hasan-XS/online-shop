@@ -23,15 +23,15 @@
                     </form>
                 </section>
             </section>
-            <b>Total price: {{ cart.total_price() }}</b>
-            <a href="/payment">Payment</a>
             <form action="/empty-cart">
                 <input type="hidden" name="id-empty" value="{{ cart_item.id }}">
                 <input type="submit" value="Empty">
             </form>
-            <hr>
         {% endfor %}
-
+        <section>
+            <b>Total price: {{ cart.total_price() }}</b>
+            <a href="/payment">Payment</a>
+        </section>
     {% else %}
         <h2>Cart Empty</h2>
     {% endif %}
