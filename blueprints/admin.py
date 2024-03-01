@@ -66,18 +66,23 @@ def edit_product(id):
         price = request.form.get("price", None)
         description = request.form.get("description", None)
         active = request.form.get("active", None)
+        file = request.files.get("cover", None)
 
         products.name = name
         products.price = price
         products.description = description
+        products.file = file
+
         if active == None:
             products.active = "not active"
         else:
             products.active = "active"
-
+        file.save(f"static/cover/{products.id}.jpg")
         db.session.commit()
 
         return redirect(url_for("admin.dashboard"))
+
+
 
 
 @app.route('/admin/dashboard', methods=["POST", "GET"])
