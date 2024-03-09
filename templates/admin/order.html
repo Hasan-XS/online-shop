@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Admin | Order</title>
+{% endblock %}
+
+{% block body %}
+<h2>STATUS: {{cart.status}}</h2>
+<form method="post">
+    <select name="status">
+        <option value="pending" {% if cart.status == "pending" %} selected {%endif%}>pending</option>
+        <option value="paid" {% if cart.status == "paid" %} selected {%endif%}>paid</option>
+        <option value="rejected" {% if cart.status == "rejected" %} selected {%endif%}>rejected</option>
+        <option value="sent" {% if cart.status == "sent" %} selected {%endif%}>sent</option>
+        <input type="submit" value="Change">
+    </select>
+</form>
+{% for item in cart.cart_items %}
+<section>
+    
+    {{item.product.name}}
+    {{item.product.price}}
+    {{item.quantity}}
+</section>
+{% endfor %}
+{% endblock %}
