@@ -4,7 +4,7 @@
 <section align="center">
   <h1 align="center">Dashboard</h1>
   <hr>
-  <section >
+  <section>
     <h2>PRODUCTS</h2>
     <table align="center">
       <tr>
@@ -45,5 +45,27 @@
     </table>
     <h1><a href="/admin/dashboard/product">Add Product</a></h1>
   </section>
+  <section>
+    <h2 align="center">Cart</h2>
+    <table style="margin: auto;">
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>User ID</th>
+        <th>Useraname</th>
+        <th>Quantity</th>
+      </tr>
+      {% for cart in carts %}
+      <tr>
+        <td>{{ cart.id }}</td>
+        <td>{{ cart.status }}</td>
+        <td>{{ cart.user_id }}</td>
+        <td>{{ cart.user }}</td>
+        <td><a href="{{ url_for('admin.order', id=cart.id) }}">more</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
 </section>
 {% endblock %}
