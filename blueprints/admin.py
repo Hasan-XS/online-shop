@@ -1,5 +1,6 @@
 from flask import Blueprint, abort, session, request, render_template, redirect, url_for
 from extention import *
+from model.cart import Cart
 from model.product import Product
 from model.user import User
 import config
@@ -89,4 +90,22 @@ def edit_product(id):
 def dashboard():
     users = User.query.all()
     products = Product.query.all()
-    return render_template("admin/dashboard.html", products=products, users=users)
+    carts = Cart.query.all()
+    return render_template("admin/dashboard.html", products=products, users=users, carts=carts)
+
+
+@app.route("/admin/dashboard/order/<id>", methods=["GET", "POST"])
+def order(id):
+    cart = Cart.query.filter(Cart.id == id).first_or_404()
+    if request.method == "GET":
+        return render_template("admin/order.html", cart=cart)
+    else:
+        status = request.form.get("status")
+        cart.status = status
+        db.session.commit()
+
+        return redirect(url_for("admin.order", id=id))
+
+
+
+
