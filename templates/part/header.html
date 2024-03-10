@@ -1,0 +1,13 @@
+<header class="header">
+    <h2 class="logo">Online Shop</h2>
+    <ul class="link-nav">
+        <li><img class="icon-link-head" src="https://img.icons8.com/color-glass/48/about--v3.png" alt="about--v3" /><a
+                href="{{ url_for('general.about') }}">About</a></li>
+        <li><img class="icon-link-head" src="https://img.icons8.com/fluency/48/shopping-cart.png" /><a
+                href="{{ url_for('user.cart') }}">Cart</a></li>
+        <li><img class="icon-link-head" src="https://img.icons8.com/color/48/dashboard-layout.png" /><a
+                href="{{ url_for('user.dashboard') }}">Dashboard</a></li>
+        <li><img class="icon-link-head" src="https://img.icons8.com/color/48/shop.png" /><a
+                href="{{ url_for('general.home') }}">Home</a></li>
+    </ul>
+</header>
