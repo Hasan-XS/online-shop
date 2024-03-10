@@ -2,6 +2,7 @@
 <title>HOME</title>
 {% endblock %} {% block body %}
 <section>
+  {%include "part/header.html"%}
   {% for p in products %}
   <a href="/details/{{p.id}}/{{p.name}}" style="all: unset; cursor: pointer">
     <div>

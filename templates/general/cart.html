@@ -1,38 +1,39 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>Cart User</title>
+<title>Cart User</title>
 {% endblock %}
 
 {% block body %}
-    {% if cart != None and cart.cart_items|list|length > 0 %}
-        {% for cart_item in cart.cart_items %}
-            <section>
-                <img style="width: 200px" src="/static/cover/{{ cart_item.product.id }}.jpg"/>
-                <h2>{{ cart_item.product.name }}</h2>
-                <h2>{{ cart_item.product.price }}</h2>
-                <h2>{{ cart_item.quantity }}</h2>
-                <section style="display: flex">
-                    <form action="/remove-cart">
-                        <input type="hidden" name="id-rem" value="{{ cart_item.id }}">
-                        <input type="submit" value="-">
-                    </form>
-                    <form action="/Increase-cart">
-                        <input type="hidden" name="id-inc" value="{{ cart_item.id }}">
-                        <input type="submit" value="+">
-                    </form>
-                </section>
-            </section>
-            <form action="/empty-cart">
-                <input type="hidden" name="id-empty" value="{{ cart_item.id }}">
-                <input type="submit" value="Empty">
-            </form>
-        {% endfor %}
-        <section>
-            <b>Total price: {{ cart.total_price() }}</b>
-            <a href="/payment">Payment</a>
-        </section>
-    {% else %}
-        <h2>Cart Empty</h2>
-    {% endif %}
+{%include "part/header.html"%}
+{% if cart != None and cart.cart_items|list|length > 0 %}
+{% for cart_item in cart.cart_items %}
+<section>
+    <img style="width: 200px" src="/static/cover/{{ cart_item.product.id }}.jpg" />
+    <h2>{{ cart_item.product.name }}</h2>
+    <h2>{{ cart_item.product.price }}</h2>
+    <h2>{{ cart_item.quantity }}</h2>
+    <section style="display: flex">
+        <form action="/remove-cart">
+            <input type="hidden" name="id-rem" value="{{ cart_item.id }}">
+            <input type="submit" value="-">
+        </form>
+        <form action="/Increase-cart">
+            <input type="hidden" name="id-inc" value="{{ cart_item.id }}">
+            <input type="submit" value="+">
+        </form>
+    </section>
+</section>
+<form action="/empty-cart">
+    <input type="hidden" name="id-empty" value="{{ cart_item.id }}">
+    <input type="submit" value="Empty">
+</form>
+{% endfor %}
+<section>
+    <b>Total price: {{ cart.total_price() }}</b>
+    <a href="/payment">Payment</a>
+</section>
+{% else %}
+<h2>Cart Empty</h2>
+{% endif %}
 {% endblock %}

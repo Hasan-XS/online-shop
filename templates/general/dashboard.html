@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}
-    <title>dashboard</title>
+<title>dashboard</title>
 {% endblock %}
 {% block body %}
-    {% for cart in current_user.carts|selectattr('status','!=','pending') %}
-        <section>
-            <h2>{{ cart.status }}</h2>
-            {{ cart.cart_items[0].product.name }}
-            <a href="{{ url_for('user.order', id=cart.id) }}">more</a>
-        </section>
-    {% endfor %}
+{%include "part/header.html"%}
+{% for cart in current_user.carts|selectattr('status','!=','pending') %}
+<section>
+    <h2>{{ cart.status }}</h2>
+    {{ cart.cart_items[0].product.name }}
+    <a href="{{ url_for('user.order', id=cart.id) }}">more</a>
+</section>
+{% endfor %}
 {% endblock %}
