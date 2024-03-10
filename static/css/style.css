@@ -1,0 +1,49 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* roote */
+:root{
+    --font-color: #5c5c5c;
+}
+
+body{
+    color: var(--font-color);
+    font-family: "Mochiy Pop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* header */
+.header>.logo {
+    font-size: 25px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 5%;
+    align-items: center;
+}
+
+.link-nav {
+    display: flex;
+    list-style: none;
+}
+
+.link-nav li a {
+    font-size: 17px;
+    color: var(--font-color);
+    margin: 30px;
+    text-decoration: none;
+}
+
+.icon-link-head{
+    width: 28px;
+    position: absolute;
+    top: 24px;
+}
