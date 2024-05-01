@@ -5,3 +5,5 @@ config.py
 static/cover
 .idea/
 static/logo-site
+
+.venv
