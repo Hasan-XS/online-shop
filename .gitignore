@@ -7,3 +7,5 @@ static/cover
 static/logo-site
 
 .venv
+venv
+instance
